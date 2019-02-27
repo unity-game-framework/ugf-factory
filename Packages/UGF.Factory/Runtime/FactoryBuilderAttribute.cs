@@ -8,13 +8,13 @@ namespace UGF.Factory.Runtime
     [BaseTypeRequired(typeof(IBuilder))]
     public class FactoryBuilderAttribute : AssemblyBrowsableTypeAttribute
     {
-        public Type FactoryType { get; }
-        public Guid Guid { get; }
+        public object FactoryId { get; }
+        public object BuilderId { get; }
 
-        public FactoryBuilderAttribute(Type factoryType, string guid)
+        public FactoryBuilderAttribute(object factoryId, object builderId)
         {
-            FactoryType = factoryType;
-            Guid = Guid.Parse(guid);
+            FactoryId = factoryId;
+            BuilderId = builderId;
         }
     }
 }
