@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace UGF.Factory.Runtime
 {
-    public interface IFactory : IDictionary
+    public interface IFactoryCollection : IDictionary
     {
         Type IdentifierType { get; }
     }

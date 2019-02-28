@@ -1,4 +1,3 @@
-using System;
 using JetBrains.Annotations;
 using UGF.Assemblies.Runtime;
 using UGF.Builder.Runtime;

@@ -1,12 +1,6 @@
-using System;
-using System.Collections;
-
 namespace UGF.Factory.Runtime
 {
-    public interface IFactoryProvider : IEnumerable
+    public interface IFactoryProvider
     {
-        int Count { get; }
-
-        Type GetIdentifierType();
     }
 }
