@@ -14,7 +14,19 @@ namespace UGF.Factory.Runtime
         bool ICollection.IsSynchronized { get { return ((ICollection)m_builders).IsSynchronized; } }
         object ICollection.SyncRoot { get { return ((ICollection)m_builders).SyncRoot; } }
 
-        private readonly Dictionary<TIdentifier, IBuilder> m_builders = new Dictionary<TIdentifier, IBuilder>();
+        private readonly Dictionary<TIdentifier, IBuilder> m_builders;
+
+        public Factory(int capacity = 0, IEqualityComparer<TIdentifier> comparer = null)
+        {
+            m_builders = new Dictionary<TIdentifier, IBuilder>(capacity, comparer);
+        }
+
+        public Factory(IDictionary<TIdentifier, IBuilder> dictionary, IEqualityComparer<TIdentifier> comparer = null)
+        {
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            
+            m_builders = new Dictionary<TIdentifier, IBuilder>(dictionary, comparer);
+        }
 
         public bool Contains(TIdentifier identifier)
         {

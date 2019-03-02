@@ -10,10 +10,22 @@ namespace UGF.Factory.Runtime
         public IFactory this[TIdentifier identifier] { get { return m_factories[identifier]; } set { m_factories[identifier] = value; } }
         public Type IdentifierType { get; } = typeof(TIdentifier);
 
-        bool ICollection.IsSynchronized { get { return ((System.Collections.ICollection)m_factories).IsSynchronized; } }
-        object ICollection.SyncRoot { get { return ((System.Collections.ICollection)m_factories).SyncRoot; } }
+        bool ICollection.IsSynchronized { get { return ((ICollection)m_factories).IsSynchronized; } }
+        object ICollection.SyncRoot { get { return ((ICollection)m_factories).SyncRoot; } }
 
-        private readonly Dictionary<TIdentifier, IFactory> m_factories = new Dictionary<TIdentifier, IFactory>();
+        private readonly Dictionary<TIdentifier, IFactory> m_factories;
+
+        public FactoryCollection(int capacity = 0, IEqualityComparer<TIdentifier> comparer = null)
+        {
+            m_factories = new Dictionary<TIdentifier, IFactory>(capacity, comparer);
+        }
+
+        public FactoryCollection(IDictionary<TIdentifier, IFactory> dictionary, IEqualityComparer<TIdentifier> comparer = null)
+        {
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            
+            m_factories = new Dictionary<TIdentifier, IFactory>(dictionary, comparer);
+        }
 
         public bool Contains(TIdentifier identifier)
         {

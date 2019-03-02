@@ -12,7 +12,19 @@ namespace UGF.Factory.Runtime
         bool ICollection.IsSynchronized { get { return ((ICollection)m_collections).IsSynchronized; } }
         object ICollection.SyncRoot { get { return ((ICollection)m_collections).SyncRoot; } }
 
-        private readonly Dictionary<Type, IFactoryCollection> m_collections = new Dictionary<Type, IFactoryCollection>();
+        private readonly Dictionary<Type, IFactoryCollection> m_collections;
+
+        public FactoryProvider(int capacity = 0, IEqualityComparer<Type> comparer = null)
+        {
+            m_collections = new Dictionary<Type, IFactoryCollection>(capacity, comparer);
+        }
+
+        public FactoryProvider(IDictionary<Type, IFactoryCollection> dictionary, IEqualityComparer<Type> comparer = null)
+        {
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            
+            m_collections = new Dictionary<Type, IFactoryCollection>(dictionary, comparer);
+        }
 
         public bool Contains(Type type)
         {
