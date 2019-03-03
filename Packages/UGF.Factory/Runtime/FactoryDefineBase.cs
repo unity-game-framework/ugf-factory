@@ -7,22 +7,53 @@ namespace UGF.Factory.Runtime
         public Type FactoryIdentifierType { get; } = typeof(TFactoryId);
         public Type BuilderIdentifierType { get; } = typeof(TBuilderId);
 
-        public abstract void Register(IFactoryProvider provider, IFactoryCollection<TFactoryId> collection, IFactory<TBuilderId> factory);
         public abstract TFactoryId GetFactoryId(IFactoryProvider provider, IFactoryCollection<TFactoryId> collection);
+        public abstract void RegisterBuilders(IFactoryProvider provider, IFactoryCollection<TFactoryId> collection, IFactory<TBuilderId> factory);
 
         public virtual IFactoryCollection<TFactoryId> GetCollection(IFactoryProvider provider)
         {
-            return new FactoryCollection<TFactoryId>();
+            if (provider == null) throw new ArgumentNullException(nameof(provider));
+            
+            if (!provider.TryGet(out IFactoryCollection<TFactoryId> collection))
+            {
+                collection = CreateCollection(provider);
+
+                provider.Add(typeof(TFactoryId), collection);
+            }
+
+            return collection;
         }
 
         public virtual IFactory<TBuilderId> GetFactory(IFactoryProvider provider, IFactoryCollection<TFactoryId> collection)
         {
+            if (provider == null) throw new ArgumentNullException(nameof(provider));
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            
+            TFactoryId factoryId = GetFactoryId(provider, collection);
+
+            if (!collection.TryGet(factoryId, out IFactory<TBuilderId> factory))
+            {
+                factory = CreateFactory(provider, collection);
+
+                collection.Add(factoryId, factory);
+            }
+
+            return factory;
+        }
+
+        public virtual IFactoryCollection<TFactoryId> CreateCollection(IFactoryProvider provider)
+        {
+            return new FactoryCollection<TFactoryId>();
+        }
+
+        public virtual IFactory<TBuilderId> CreateFactory(IFactoryProvider provider, IFactoryCollection<TFactoryId> collection)
+        {
             return new Factory<TBuilderId>();
         }
 
-        void IFactoryDefine.Register(IFactoryProvider provider, IFactoryCollection collection, IFactory factory)
+        void IFactoryDefine.RegisterBuilders(IFactoryProvider provider, IFactoryCollection collection, IFactory factory)
         {
-            Register(provider, (IFactoryCollection<TFactoryId>)collection, (IFactory<TBuilderId>)factory);
+            RegisterBuilders(provider, (IFactoryCollection<TFactoryId>)collection, (IFactory<TBuilderId>)factory);
         }
 
         IFactoryCollection IFactoryDefine.GetCollection(IFactoryProvider provider)
@@ -33,6 +64,16 @@ namespace UGF.Factory.Runtime
         IFactory IFactoryDefine.GetFactory(IFactoryProvider provider, IFactoryCollection collection)
         {
             return GetFactory(provider, (IFactoryCollection<TFactoryId>)collection);
+        }
+
+        IFactoryCollection IFactoryDefine.CreateCollection(IFactoryProvider provider)
+        {
+            return CreateCollection(provider);
+        }
+
+        IFactory IFactoryDefine.CreateFactory(IFactoryProvider provider, IFactoryCollection collection)
+        {
+            return CreateFactory(provider, (IFactoryCollection<TFactoryId>)collection);
         }
     }
 }
