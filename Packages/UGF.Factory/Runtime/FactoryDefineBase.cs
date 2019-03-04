@@ -18,7 +18,7 @@ namespace UGF.Factory.Runtime
             {
                 collection = CreateCollection(provider);
 
-                provider.Add(typeof(TFactoryId), collection);
+                provider.Add(collection);
             }
 
             return collection;

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace UGF.Factory.Runtime
 {
+    /// <summary>
+    /// Represents generic collection of the factories stored by identifier.
+    /// </summary>
     public class FactoryCollection<TIdentifier> : IFactoryCollection<TIdentifier>
     {
         public int Count { get { return m_factories.Count; } }

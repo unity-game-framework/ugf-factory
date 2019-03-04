@@ -6,8 +6,15 @@ using UnityEngine;
 
 namespace UGF.Factory.Runtime
 {
+    /// <summary>
+    /// Provides utilities for working with factories.
+    /// </summary>
     public static class FactoryUtility
     {
+        /// <summary>
+        /// Registers all found factory defines to the specified provider. 
+        /// </summary>
+        /// <param name="provider">The factory provider.</param>
         public static void RegisterFactories(IFactoryProvider provider)
         {
             if (provider == null) throw new ArgumentNullException(nameof(provider));
@@ -26,6 +33,10 @@ namespace UGF.Factory.Runtime
             }
         }
         
+        /// <summary>
+        /// Gets all found factory defines to the specified collection.
+        /// </summary>
+        /// <param name="defines">The collection of the defines to fill.</param>
         public static void GetFactoryDefines(List<IFactoryDefine> defines)
         {
             if (defines == null) throw new ArgumentNullException(nameof(defines));
@@ -37,6 +48,11 @@ namespace UGF.Factory.Runtime
             GetFactoryDefines(defines, types);
         }
         
+        /// <summary>
+        /// Gets all found factory defines from the specified assembly to the specified collection.
+        /// </summary>
+        /// <param name="defines">The collection of the defines to fill.</param>
+        /// <param name="assembly">The assembly to find.</param>
         public static void GetFactoryDefines(List<IFactoryDefine> defines, Assembly assembly)
         {
             if (defines == null) throw new ArgumentNullException(nameof(defines));
@@ -49,6 +65,11 @@ namespace UGF.Factory.Runtime
             GetFactoryDefines(defines, types);
         }
         
+        /// <summary>
+        /// Gets all factory defines the specified collection of the types.
+        /// </summary>
+        /// <param name="defines">The collection of the defines to fill.</param>
+        /// <param name="types">The collection of the types to find.</param>
         public static void GetFactoryDefines(List<IFactoryDefine> defines, List<Type> types)
         {
             if (defines == null) throw new ArgumentNullException(nameof(defines));
@@ -65,6 +86,14 @@ namespace UGF.Factory.Runtime
             }
         }
 
+        /// <summary>
+        /// Tries to create factory defines from the specified type.
+        /// <para>
+        /// Returns true if the define was created, otherwise false.
+        /// </para>
+        /// </summary>
+        /// <param name="type">The type of the define to create.</param>
+        /// <param name="define">The created factory define.</param>
         public static bool TryCreateFactoryDefine(Type type, out IFactoryDefine define)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));

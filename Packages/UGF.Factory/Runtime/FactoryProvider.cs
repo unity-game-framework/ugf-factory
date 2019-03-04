@@ -7,7 +7,7 @@ namespace UGF.Factory.Runtime
     public class FactoryProvider : IFactoryProvider
     {
         public int Count { get { return m_collections.Count; } }
-        public IFactoryCollection this[Type type] { get { return m_collections[type]; } set { m_collections[type] = value; } }
+        public IFactoryCollection this[Type type] { get { return m_collections[type]; } }
 
         bool ICollection.IsSynchronized { get { return ((ICollection)m_collections).IsSynchronized; } }
         object ICollection.SyncRoot { get { return ((ICollection)m_collections).SyncRoot; } }
@@ -36,14 +36,14 @@ namespace UGF.Factory.Runtime
             return m_collections.ContainsValue(collection);
         }
 
-        public void Add(Type type, IFactoryCollection collection)
+        public void Add(IFactoryCollection collection)
         {
-            m_collections.Add(type, collection);
+            m_collections.Add(collection.IdentifierType, collection);
         }
 
-        public bool Remove(Type type)
+        public bool Remove(IFactoryCollection collection)
         {
-            return m_collections.Remove(type);
+            return m_collections.Remove(collection.IdentifierType);
         }
 
         public void Clear()

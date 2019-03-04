@@ -5,6 +5,9 @@ using UGF.Builder.Runtime;
 
 namespace UGF.Factory.Runtime
 {
+    /// <summary>
+    /// Represents the generic collection of the factory builders stored by identifier.
+    /// </summary>
     public class Factory<TIdentifier> : IFactory<TIdentifier>
     {
         public int Count { get { return m_builders.Count; } }
