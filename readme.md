@@ -4,14 +4,15 @@ UGF.Factory
 
 ## Info
 
-- **Version**: `0.0.0-preview`
+- **Version**: `1.0.0`
 - **Unity Version**: `2019.1.0`
 - **Scripting Runtime Version**: `.NET 4.x Equivalent`
 - **Api Compatibility Level**: `.NET Standard 2.0`
 
 ### Dependencies
 
-- N/A
+- [UGF.Assemblies][5]: `1.0.0`
+- [UGF.Builder][6]: `1.0.0`
 
 ### Changelog
 
@@ -19,8 +20,8 @@ UGF.Factory
 
 ### Registries
 
-- [Stable][2] (N/A)
-- [Develop][3] (N/A)
+- [Stable][2]
+- [Develop][3]
 
 ## Description
 
@@ -37,3 +38,5 @@ Read about how to install any packages from the `Unity Game Framework` registry:
 [2]: https://bintray.com/unity-game-framework/stable/com.ugf.factory
 [3]: https://bintray.com/unity-game-framework/dev/com.ugf.factory
 [4]: https://github.com/unity-game-framework/ugf-documentation/wiki/Install-Package
+[5]: https://github.com/unity-game-framework/ugf-assemblies
+[6]: https://github.com/unity-game-framework/ugf-builder
