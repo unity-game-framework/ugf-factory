@@ -11,7 +11,8 @@ UGF.Factory
 
 ### Dependencies
 
-- N/A
+- [UGF.Assemblies][5]: `1.0.0`
+- [UGF.Builder][6]: `0.0.1-preview`
 
 ### Changelog
 
@@ -37,3 +38,5 @@ Read about how to install any packages from the `Unity Game Framework` registry:
 [2]: https://bintray.com/unity-game-framework/stable/com.ugf.factory
 [3]: https://bintray.com/unity-game-framework/dev/com.ugf.factory
 [4]: https://github.com/unity-game-framework/ugf-documentation/wiki/Install-Package
+[5]: https://github.com/unity-game-framework/ugf-assemblies
+[6]: https://github.com/unity-game-framework/ugf-builder
