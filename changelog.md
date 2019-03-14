@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Milestone](https://github.com/unity-game-framework/ugf-factory/milestone/0?closed=1)
 
 ### Added
-- Nothing.
+- Add missing summaries for `Factory`, `FactoryDefineBase`, `FactoryCollection` and `FactoryProvider`.
 
 ### Changed
-- Nothing.
+- Update package dependencies:
+    - `com.ugf.assemblies`: from `1.0.0` to `1.0.1`;
+    - `com.ugf.builder`: from `1.0.0` to `1.1.0`;
 
 ### Deprecated
 - Nothing.
