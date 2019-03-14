@@ -10,6 +10,13 @@ namespace UGF.Factory.Runtime
         public abstract TFactoryId GetFactoryId(IFactoryProvider provider, IFactoryCollection<TFactoryId> collection);
         public abstract void RegisterBuilders(IFactoryProvider provider, IFactoryCollection<TFactoryId> collection, IFactory<TBuilderId> factory);
 
+        /// <summary>
+        /// Gets the factory collection from the provider.
+        /// <para>
+        /// If the factory collection does not exists, will create and add to the provider.
+        /// </para>
+        /// </summary>
+        /// <param name="provider">The factory provider to get from.</param>
         public virtual IFactoryCollection<TFactoryId> GetCollection(IFactoryProvider provider)
         {
             if (provider == null) throw new ArgumentNullException(nameof(provider));
@@ -41,6 +48,10 @@ namespace UGF.Factory.Runtime
             return factory;
         }
 
+        /// <summary>
+        /// Creates the factory collection for the specified provider.
+        /// </summary>
+        /// <param name="provider">The factory provider.</param>
         public virtual IFactoryCollection<TFactoryId> CreateCollection(IFactoryProvider provider)
         {
             return new FactoryCollection<TFactoryId>();

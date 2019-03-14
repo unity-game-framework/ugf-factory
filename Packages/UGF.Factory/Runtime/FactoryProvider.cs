@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace UGF.Factory.Runtime
 {
+    /// <summary>
+    /// Represents collection of the factory collections stored by the type of the collection identifier.
+    /// </summary>
     public class FactoryProvider : IFactoryProvider
     {
         public int Count { get { return m_collections.Count; } }
@@ -14,11 +17,21 @@ namespace UGF.Factory.Runtime
 
         private readonly Dictionary<Type, IFactoryCollection> m_collections;
 
+        /// <summary>
+        /// Creates provider with the specified capacity and identifier comparer, if presents.
+        /// </summary>
+        /// <param name="capacity">The initial capacity of the collection.</param>
+        /// <param name="comparer">The comparer of the identifiers.</param>
         public FactoryProvider(int capacity = 0, IEqualityComparer<Type> comparer = null)
         {
             m_collections = new Dictionary<Type, IFactoryCollection>(capacity, comparer);
         }
 
+        /// <summary>
+        /// Creates provider from the specified collection of the collections and identifier comparer, if presents.
+        /// </summary>
+        /// <param name="dictionary">The collection of the factory collections.</param>
+        /// <param name="comparer">The comparer of the identifiers.</param>
         public FactoryProvider(IDictionary<Type, IFactoryCollection> dictionary, IEqualityComparer<Type> comparer = null)
         {
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));

@@ -19,11 +19,21 @@ namespace UGF.Factory.Runtime
 
         private readonly Dictionary<TIdentifier, IBuilder> m_builders;
 
+        /// <summary>
+        /// Creates factory with the specified capacity and identifier comparer, if presents.
+        /// </summary>
+        /// <param name="capacity">The initial capacity of the builder collection.</param>
+        /// <param name="comparer">The comparer of the identifiers.</param>
         public Factory(int capacity = 0, IEqualityComparer<TIdentifier> comparer = null)
         {
             m_builders = new Dictionary<TIdentifier, IBuilder>(capacity, comparer);
         }
 
+        /// <summary>
+        /// Creates factory from the specified collection of the builders and identifier comparer, if presents.
+        /// </summary>
+        /// <param name="dictionary">The collection of the builders.</param>
+        /// <param name="comparer">The comparer of the identifiers.</param>
         public Factory(IDictionary<TIdentifier, IBuilder> dictionary, IEqualityComparer<TIdentifier> comparer = null)
         {
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
