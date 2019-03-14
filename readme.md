@@ -4,15 +4,15 @@ UGF.Factory
 
 ## Info
 
-- **Version**: `1.0.0`
+- **Version**: `1.0.1`
 - **Unity Version**: `2019.1.0`
 - **Scripting Runtime Version**: `.NET 4.x Equivalent`
 - **Api Compatibility Level**: `.NET Standard 2.0`
 
 ### Dependencies
 
-- [UGF.Assemblies][5]: `1.0.0`
-- [UGF.Builder][6]: `1.0.0`
+- [UGF.Assemblies][5]: `1.0.1`
+- [UGF.Builder][6]: `1.1.0`
 
 ### Changelog
 
