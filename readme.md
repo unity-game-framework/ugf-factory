@@ -24,7 +24,7 @@ UGF.Factory
 
 ## Description
 
-No description.
+Provides utilities to work with factories.
 
 ## How to Install
 
