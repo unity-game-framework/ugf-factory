@@ -7,6 +7,9 @@ namespace UGF.Factory.Runtime
     /// </summary>
     public interface IFactoryCollection<TIdentifier> : IFactoryCollection
     {
+        /// <summary>
+        /// Gets the collection of the factories.
+        /// </summary>
         IReadOnlyDictionary<TIdentifier, IFactory> Factories { get; }
 
         /// <summary>

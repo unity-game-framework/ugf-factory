@@ -8,6 +8,9 @@ namespace UGF.Factory.Runtime
     /// </summary>
     public interface IFactoryProvider
     {
+        /// <summary>
+        /// Gets the collection of the factory collections.
+        /// </summary>
         IReadOnlyDictionary<Type, IFactoryCollection> Collections { get; }
 
         /// <summary>

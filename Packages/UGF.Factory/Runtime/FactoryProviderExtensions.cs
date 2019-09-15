@@ -32,6 +32,8 @@ namespace UGF.Factory.Runtime
         /// <param name="builderId">The identifier of the builder.</param>
         public static TBuilder GetBuilder<TBuilder, TFactoryId, TBuilderId>(this IFactoryProvider provider, TFactoryId factoryId, TBuilderId builderId) where TBuilder : IBuilder
         {
+            if (provider == null) throw new ArgumentNullException(nameof(provider));
+
             IFactoryCollection<TFactoryId> collection = provider.Get<TFactoryId>();
             var factory = collection.Get<IFactory<TBuilderId>>(factoryId);
 
@@ -70,6 +72,8 @@ namespace UGF.Factory.Runtime
         /// <param name="builder">The found builder.</param>
         public static bool TryGetBuilder<TBuilder, TFactoryId, TBuilderId>(this IFactoryProvider provider, TFactoryId factoryId, TBuilderId builderId, out TBuilder builder) where TBuilder : IBuilder
         {
+            if (provider == null) throw new ArgumentNullException(nameof(provider));
+
             if (provider.TryGet(out IFactoryCollection<TFactoryId> collection) && collection.TryGet(factoryId, out IFactory<TBuilderId> factory))
             {
                 if (factory.TryGet(builderId, out IBuilder value) && value is TBuilder result)

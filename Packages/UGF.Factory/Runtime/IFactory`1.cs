@@ -8,6 +8,9 @@ namespace UGF.Factory.Runtime
     /// </summary>
     public interface IFactory<TIdentifier> : IFactory
     {
+        /// <summary>
+        /// Gets the collection of the builders.
+        /// </summary>
         IReadOnlyDictionary<TIdentifier, IBuilder> Builders { get; }
 
         /// <summary>

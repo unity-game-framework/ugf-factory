@@ -27,11 +27,15 @@ namespace UGF.Factory.Runtime
 
         public void Add(IFactoryCollection collection)
         {
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+
             m_collections.Add(collection.IdentifierType, collection);
         }
 
         public bool Remove(IFactoryCollection collection)
         {
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+
             return m_collections.Remove(collection.IdentifierType);
         }
 

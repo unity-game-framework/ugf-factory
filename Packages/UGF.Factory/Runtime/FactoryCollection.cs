@@ -29,6 +29,8 @@ namespace UGF.Factory.Runtime
 
         public void Add(TIdentifier identifier, IFactory factory)
         {
+            if (factory == null) throw new ArgumentNullException(nameof(factory));
+
             m_factories.Add(identifier, factory);
         }
 

@@ -30,6 +30,8 @@ namespace UGF.Factory.Runtime
 
         public void Add(TIdentifier identifier, IBuilder builder)
         {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
             m_builders.Add(identifier, builder);
         }
 
