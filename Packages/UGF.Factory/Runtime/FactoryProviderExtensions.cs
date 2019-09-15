@@ -20,7 +20,7 @@ namespace UGF.Factory.Runtime
         {
             return GetBuilder<TBuilder, Type, TBuilderId>(provider, typeof(TBuilder), builderId);
         }
-        
+
         /// <summary>
         /// Gets builder from the provider by the specified factory identifier and builder identifier.
         /// <para>
@@ -79,7 +79,7 @@ namespace UGF.Factory.Runtime
                 }
             }
 
-            builder = default(TBuilder);
+            builder = default;
             return false;
         }
     }

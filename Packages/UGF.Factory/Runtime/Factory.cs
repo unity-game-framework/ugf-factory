@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UGF.Builder.Runtime;
 
 namespace UGF.Factory.Runtime
@@ -10,12 +11,8 @@ namespace UGF.Factory.Runtime
     /// </summary>
     public class Factory<TIdentifier> : IFactory<TIdentifier>
     {
-        public int Count { get { return m_builders.Count; } }
-        public IBuilder this[TIdentifier identifier] { get { return m_builders[identifier]; } set { m_builders[identifier] = value; } }
+        public IReadOnlyDictionary<TIdentifier, IBuilder> Builders { get; }
         public Type IdentifierType { get; } = typeof(TIdentifier);
-
-        bool ICollection.IsSynchronized { get { return ((ICollection)m_builders).IsSynchronized; } }
-        object ICollection.SyncRoot { get { return ((ICollection)m_builders).SyncRoot; } }
 
         private readonly Dictionary<TIdentifier, IBuilder> m_builders;
 
@@ -27,28 +24,8 @@ namespace UGF.Factory.Runtime
         public Factory(int capacity = 0, IEqualityComparer<TIdentifier> comparer = null)
         {
             m_builders = new Dictionary<TIdentifier, IBuilder>(capacity, comparer);
-        }
 
-        /// <summary>
-        /// Creates factory from the specified collection of the builders and identifier comparer, if presents.
-        /// </summary>
-        /// <param name="dictionary">The collection of the builders.</param>
-        /// <param name="comparer">The comparer of the identifiers.</param>
-        public Factory(IDictionary<TIdentifier, IBuilder> dictionary, IEqualityComparer<TIdentifier> comparer = null)
-        {
-            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
-            
-            m_builders = new Dictionary<TIdentifier, IBuilder>(dictionary, comparer);
-        }
-
-        public bool Contains(TIdentifier identifier)
-        {
-            return m_builders.ContainsKey(identifier);
-        }
-
-        public bool Contains(IBuilder builder)
-        {
-            return m_builders.ContainsValue(builder);
+            Builders = new ReadOnlyDictionary<TIdentifier, IBuilder>(m_builders);
         }
 
         public void Add(TIdentifier identifier, IBuilder builder)
@@ -79,7 +56,7 @@ namespace UGF.Factory.Runtime
                 return true;
             }
 
-            builder = default(T);
+            builder = default;
             return false;
         }
 
@@ -88,19 +65,9 @@ namespace UGF.Factory.Runtime
             return m_builders.TryGetValue(identifier, out builder);
         }
 
-        public void CopyTo(Array array, int index)
-        {
-            ((ICollection)m_builders).CopyTo(array, index);
-        }
-
         public Dictionary<TIdentifier, IBuilder>.Enumerator GetEnumerator()
         {
             return m_builders.GetEnumerator();
-        }
-
-        IEnumerator<KeyValuePair<TIdentifier, IBuilder>> IEnumerable<KeyValuePair<TIdentifier, IBuilder>>.GetEnumerator()
-        {
-            return ((IEnumerable<KeyValuePair<TIdentifier, IBuilder>>)m_builders).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

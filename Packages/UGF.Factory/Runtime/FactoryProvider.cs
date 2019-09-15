@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace UGF.Factory.Runtime
 {
@@ -9,11 +9,7 @@ namespace UGF.Factory.Runtime
     /// </summary>
     public class FactoryProvider : IFactoryProvider
     {
-        public int Count { get { return m_collections.Count; } }
-        public IFactoryCollection this[Type type] { get { return m_collections[type]; } }
-
-        bool ICollection.IsSynchronized { get { return ((ICollection)m_collections).IsSynchronized; } }
-        object ICollection.SyncRoot { get { return ((ICollection)m_collections).SyncRoot; } }
+        public IReadOnlyDictionary<Type, IFactoryCollection> Collections { get; }
 
         private readonly Dictionary<Type, IFactoryCollection> m_collections;
 
@@ -25,28 +21,8 @@ namespace UGF.Factory.Runtime
         public FactoryProvider(int capacity = 0, IEqualityComparer<Type> comparer = null)
         {
             m_collections = new Dictionary<Type, IFactoryCollection>(capacity, comparer);
-        }
 
-        /// <summary>
-        /// Creates provider from the specified collection of the collections and identifier comparer, if presents.
-        /// </summary>
-        /// <param name="dictionary">The collection of the factory collections.</param>
-        /// <param name="comparer">The comparer of the identifiers.</param>
-        public FactoryProvider(IDictionary<Type, IFactoryCollection> dictionary, IEqualityComparer<Type> comparer = null)
-        {
-            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
-            
-            m_collections = new Dictionary<Type, IFactoryCollection>(dictionary, comparer);
-        }
-
-        public bool Contains(Type type)
-        {
-            return m_collections.ContainsKey(type);
-        }
-
-        public bool Contains(IFactoryCollection collection)
-        {
-            return m_collections.ContainsValue(collection);
+            Collections = new ReadOnlyDictionary<Type, IFactoryCollection>(m_collections);
         }
 
         public void Add(IFactoryCollection collection)
@@ -86,24 +62,9 @@ namespace UGF.Factory.Runtime
             return m_collections.TryGetValue(type, out collection);
         }
 
-        public void CopyTo(Array array, int index)
-        {
-            ((ICollection)m_collections).CopyTo(array, index);
-        }
-
         public Dictionary<Type, IFactoryCollection>.Enumerator GetEnumerator()
         {
             return m_collections.GetEnumerator();
-        }
-
-        IEnumerator<KeyValuePair<Type, IFactoryCollection>> IEnumerable<KeyValuePair<Type, IFactoryCollection>>.GetEnumerator()
-        {
-            return ((IEnumerable<KeyValuePair<Type, IFactoryCollection>>)m_collections).GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable)m_collections).GetEnumerator();
         }
     }
 }
