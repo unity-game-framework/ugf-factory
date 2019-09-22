@@ -5,8 +5,7 @@ UGF.Factory
 ## Info
 
 - **Version**: `1.0.1`
-- **Unity Version**: `2019.1.0`
-- **Scripting Runtime Version**: `.NET 4.x Equivalent`
+- **Unity Version**: `2019.2.0`
 - **Api Compatibility Level**: `.NET Standard 2.0`
 
 ### Dependencies
@@ -25,7 +24,7 @@ UGF.Factory
 
 ## Description
 
-No description.
+Provides utilities to work with factories.
 
 ## How to Install
 

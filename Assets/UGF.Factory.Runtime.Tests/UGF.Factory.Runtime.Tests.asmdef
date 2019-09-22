@@ -5,15 +5,16 @@
         "GUID:6c7389a7d4bbed54e96eb1e71a69798e",
         "GUID:47c3349eaf0910446a6e557ee1a6748f"
     ],
-    "optionalUnityReferences": [
-        "TestAssemblies"
-    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
     "versionDefines": []
 }
