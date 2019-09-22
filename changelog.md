@@ -26,6 +26,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Nothing.
 
+## 2.0.0-preview - 2019-09-22
+- [Commits](https://github.com/unity-game-framework/ugf-factory/compare/1.0.1...2.0.0-preview)
+- [Milestone](https://github.com/unity-game-framework/ugf-factory/milestone/3?closed=1)
+
+### Added
+- Package short description.
+
+### Changed
+- Update to Unity 2019.2.
+- Rework all collections and `FactoryProvider`.
+
+### Removed
+- Update package dependencies:
+    - `com.ugf.assemblies`: `1.0.1`;
+- Factory defines and assembly search functionality.
+
 ## 1.0.1 - 2019-03-14
 - [Commits](https://github.com/unity-game-framework/ugf-factory/compare/1.0.0...1.0.1)
 - [Milestone](https://github.com/unity-game-framework/ugf-factory/milestone/2?closed=1)

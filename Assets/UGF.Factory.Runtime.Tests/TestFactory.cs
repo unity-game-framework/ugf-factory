@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using NUnit.Framework;
 using UGF.Builder.Runtime;
 using UGF.Builder.Runtime.GameObjects;
@@ -12,9 +11,9 @@ namespace UGF.Factory.Runtime.Tests
         {
             var factory = new Factory<int>();
 
-            factory.Add(0, null);
+            factory.Add(0, new BuilderActivator(typeof(int)));
 
-            Assert.AreEqual(1, factory.Count);
+            Assert.AreEqual(1, factory.Builders.Count);
         }
 
         [Test]
@@ -32,20 +31,7 @@ namespace UGF.Factory.Runtime.Tests
 
             factory.Add(0, new GameObjectBuilderEmpty());
 
-            bool result = factory.Contains(0);
-
-            Assert.True(result);
-        }
-
-        [Test]
-        public void ContainsValue()
-        {
-            var factory = new Factory<int>();
-            var builder = new GameObjectBuilderEmpty();
-
-            factory.Add(0, builder);
-
-            bool result = factory.Contains(builder);
+            bool result = factory.Builders.ContainsKey(0);
 
             Assert.True(result);
         }
@@ -57,7 +43,7 @@ namespace UGF.Factory.Runtime.Tests
 
             factory.Add(0, new GameObjectBuilderEmpty());
 
-            Assert.AreEqual(1, factory.Count);
+            Assert.AreEqual(1, factory.Builders.Count);
         }
 
         [Test]
@@ -68,7 +54,7 @@ namespace UGF.Factory.Runtime.Tests
             factory.Add(0, new GameObjectBuilderEmpty());
             factory.Remove(0);
 
-            Assert.AreEqual(0, factory.Count);
+            Assert.AreEqual(0, factory.Builders.Count);
         }
 
         [Test]
@@ -79,7 +65,7 @@ namespace UGF.Factory.Runtime.Tests
             factory.Add(0, new GameObjectBuilderEmpty());
             factory.Clear();
 
-            Assert.AreEqual(0, factory.Count);
+            Assert.AreEqual(0, factory.Builders.Count);
         }
 
         [Test]
@@ -124,21 +110,6 @@ namespace UGF.Factory.Runtime.Tests
             Assert.False(result2);
             Assert.NotNull(builder1);
             Assert.Null(builder2);
-        }
-
-        [Test]
-        public void CopyTo()
-        {
-            var factory = new Factory<int>();
-            var array = new KeyValuePair<int, IBuilder>[1];
-
-            factory.Add(1, new GameObjectBuilderEmpty());
-            factory.CopyTo(array, 0);
-
-            KeyValuePair<int, IBuilder> pair = array[0];
-            
-            Assert.AreEqual(1, pair.Key);
-            Assert.NotNull(pair.Value);
         }
     }
 }
