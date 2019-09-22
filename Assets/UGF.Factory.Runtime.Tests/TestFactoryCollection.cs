@@ -9,7 +9,7 @@ namespace UGF.Factory.Runtime.Tests
         {
             var collection = new FactoryCollection<int>();
 
-            collection.Add(0, null);
+            collection.Add(0, new Factory<int>());
 
             Assert.AreEqual(1, collection.Factories.Count);
         }
@@ -27,7 +27,7 @@ namespace UGF.Factory.Runtime.Tests
         {
             var collection = new FactoryCollection<int>();
 
-            collection.Add(0, null);
+            collection.Add(0, new Factory<int>());
 
             bool result = collection.Factories.ContainsKey(0);
 
@@ -39,7 +39,7 @@ namespace UGF.Factory.Runtime.Tests
         {
             var collection = new FactoryCollection<int>();
 
-            collection.Add(0, null);
+            collection.Add(0, new Factory<int>());
 
             Assert.AreEqual(1, collection.Factories.Count);
         }
@@ -49,7 +49,7 @@ namespace UGF.Factory.Runtime.Tests
         {
             var collection = new FactoryCollection<int>();
 
-            collection.Add(0, null);
+            collection.Add(0, new Factory<int>());
             collection.Remove(0);
 
             Assert.AreEqual(0, collection.Factories.Count);
@@ -60,7 +60,7 @@ namespace UGF.Factory.Runtime.Tests
         {
             var collection = new FactoryCollection<int>();
 
-            collection.Add(0, null);
+            collection.Add(0, new Factory<int>());
             collection.Clear();
 
             Assert.AreEqual(0, collection.Factories.Count);

@@ -11,7 +11,7 @@ namespace UGF.Factory.Runtime.Tests
         {
             var factory = new Factory<int>();
 
-            factory.Add(0, null);
+            factory.Add(0, new BuilderActivator(typeof(int)));
 
             Assert.AreEqual(1, factory.Builders.Count);
         }
