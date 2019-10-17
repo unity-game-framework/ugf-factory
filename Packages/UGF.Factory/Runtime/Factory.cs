@@ -47,7 +47,12 @@ namespace UGF.Factory.Runtime
 
         public T Get<T>(TIdentifier identifier) where T : IBuilder
         {
-            return (T)m_builders[identifier];
+            if (!m_builders.TryGetValue(identifier, out IBuilder value))
+            {
+                throw new ArgumentException($"The builder not found by the specified identifier: '{identifier}'.");
+            }
+
+            return (T)value;
         }
 
         public bool TryGet<T>(TIdentifier identifier, out T builder) where T : IBuilder

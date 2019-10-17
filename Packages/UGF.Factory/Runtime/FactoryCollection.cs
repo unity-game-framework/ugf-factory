@@ -46,7 +46,12 @@ namespace UGF.Factory.Runtime
 
         public T Get<T>(TIdentifier identifier) where T : IFactory
         {
-            return (T)m_factories[identifier];
+            if (!m_factories.TryGetValue(identifier, out IFactory factory))
+            {
+                throw new ArgumentException($"The factory not found by the specified identifier: '{identifier}'.");
+            }
+
+            return (T)factory;
         }
 
         public bool TryGet<T>(TIdentifier identifier, out T factory) where T : IFactory
