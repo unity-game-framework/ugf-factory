@@ -4,7 +4,7 @@ UGF.Factory
 
 ## Info
 
-- **Version**: `2.0.0-preview`
+- **Version**: `2.1.0-preview`
 - **Unity Version**: `2019.3.0`
 - **Api Compatibility Level**: `.NET Standard 2.0`
 
