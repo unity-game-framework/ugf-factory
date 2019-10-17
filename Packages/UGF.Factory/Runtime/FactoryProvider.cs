@@ -46,7 +46,12 @@ namespace UGF.Factory.Runtime
 
         public IFactoryCollection<T> Get<T>()
         {
-            return (IFactoryCollection<T>)m_collections[typeof(T)];
+            if (!m_collections.TryGetValue(typeof(T), out IFactoryCollection collection))
+            {
+                throw new ArgumentException($"The factory collection not found by the specified type: '{typeof(T)}'.");
+            }
+
+            return (IFactoryCollection<T>)collection;
         }
 
         public bool TryGet<T>(out IFactoryCollection<T> collection)

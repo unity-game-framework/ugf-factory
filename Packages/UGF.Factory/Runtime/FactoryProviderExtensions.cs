@@ -9,6 +9,77 @@ namespace UGF.Factory.Runtime
     public static class FactoryProviderExtensions
     {
         /// <summary>
+        /// Adds builder into the provider by the specified factory and builder identifiers.
+        /// </summary>
+        /// <param name="provider">The factory provider.</param>
+        /// <param name="builderId">The identifier of the builder.</param>
+        /// <param name="handler">The builder handler.</param>
+        public static void AddBuilder<TResult, TBuilderId>(this IFactoryProvider provider, TBuilderId builderId, Func<TResult> handler)
+        {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
+            var builder = new BuilderFunc<TResult>(handler);
+
+            AddBuilder(provider, typeof(TResult), builderId, builder);
+        }
+
+        /// <summary>
+        /// Adds builder into the provider by the specified factory and builder identifiers.
+        /// </summary>
+        /// <param name="provider">The factory provider.</param>
+        /// <param name="builderId">The identifier of the builder.</param>
+        /// <param name="builder">The builder to add.</param>
+        public static void AddBuilder<TResult, TBuilderId>(this IFactoryProvider provider, TBuilderId builderId, IBuilder builder)
+        {
+            AddBuilder(provider, typeof(TResult), builderId, builder);
+        }
+
+        /// <summary>
+        /// Adds builder into the provider by the specified factory and builder identifiers.
+        /// </summary>
+        /// <param name="provider">The factory provider.</param>
+        /// <param name="factoryId">The identifier of the factory.</param>
+        /// <param name="builderId">The identifier of the builder.</param>
+        /// <param name="builder">The builder to add.</param>
+        public static void AddBuilder<TFactoryId, TBuilderId>(this IFactoryProvider provider, TFactoryId factoryId, TBuilderId builderId, IBuilder builder)
+        {
+            if (provider == null) throw new ArgumentNullException(nameof(provider));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
+            if (!provider.TryGet(out IFactoryCollection<TFactoryId> collection))
+            {
+                collection = new FactoryCollection<TFactoryId>();
+
+                provider.Add(collection);
+            }
+
+            if (!collection.TryGet(factoryId, out IFactory<TBuilderId> factory))
+            {
+                factory = new Factory<TBuilderId>();
+
+                collection.Add(factoryId, factory);
+            }
+
+            factory.Add(builderId, builder);
+        }
+
+        /// <summary>
+        /// Removes builder from the provider by the specified factory and builder identifiers.
+        /// </summary>
+        /// <param name="provider">The factory provider.</param>
+        /// <param name="factoryId">The identifier of the factory.</param>
+        /// <param name="builderId">The identifier of the builder.</param>
+        public static void RemoveBuilder<TFactoryId, TBuilderId>(this IFactoryProvider provider, TFactoryId factoryId, TBuilderId builderId)
+        {
+            if (provider == null) throw new ArgumentNullException(nameof(provider));
+
+            if (provider.TryGet(out IFactoryCollection<TFactoryId> collection) && collection.TryGet(factoryId, out IFactory<TBuilderId> factory))
+            {
+                factory.Remove(builderId);
+            }
+        }
+
+        /// <summary>
         /// Gets typed builder from the provider with the specified identifier.
         /// <para>
         /// The type of the builder represents the identifier of the factory collection and factory id.
