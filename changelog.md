@@ -26,6 +26,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Nothing.
 
+## 2.1.0-preview - 2019-10-17
+- [Commits](https://github.com/unity-game-framework/ugf-factory/compare/2.0.0-preview...2.1.0-preview)
+- [Milestone](https://github.com/unity-game-framework/ugf-factory/milestone/4?closed=1)
+
+### Added
+- `FactoryProviderExtensions`: `AddBuilder` and `RemoveBuilder` methods.
+
+### Changed
+- Update to Unity 2019.3.
+
 ## 2.0.0-preview - 2019-09-22
 - [Commits](https://github.com/unity-game-framework/ugf-factory/compare/1.0.1...2.0.0-preview)
 - [Milestone](https://github.com/unity-game-framework/ugf-factory/milestone/3?closed=1)

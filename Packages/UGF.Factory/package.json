@@ -1,8 +1,8 @@
 {
   "name": "com.ugf.factory",
   "displayName": "UGF.Factory",
-  "version": "2.0.0-preview",
-  "unity": "2019.2",
+  "version": "2.1.0-preview",
+  "unity": "2019.3",
   "description": "Provides utilities to work with factories.",
   "author": {
     "name": "Unity Game Framework",
